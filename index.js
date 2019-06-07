@@ -2,8 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var crypto = require('crypto');
 var Buffer = require('buffer').Buffer;
-var gutil = require('gulp-util');
-var PluginError = gutil.PluginError;
+var PluginError = require('plugin-error');
 var map = require('event-stream').map;
 
 var FILE_DECL = /(?:href=|src=|url\()['|"]([^\s>"']+?)\?rev=([^\s>"']+?)['|"]/gi;
@@ -61,13 +60,14 @@ var revPlugin = function revPlugin(opts) {
         }
         catch(e) {
           // fail silently.
+          console.log('gulp-rev-append', e);
         }
       }
       lines[i] = line;
       FILE_DECL.lastIndex = 0;
     }
 
-    file.contents = new Buffer(lines.join('\n'));
+    file.contents = Buffer.from(lines.join('\n'));
     cb(null, file);
 
   });

@@ -1,4 +1,4 @@
-var File = require('gulp-util').File;
+var File = require('vinyl');
 var Buffer = require('buffer').Buffer;
 
 module.exports = function() {
@@ -12,7 +12,7 @@ module.exports = function() {
       cwd: 'test/fixtures/',
       base: 'test/fixtures/static',
       path: 'test/fixtures/static/absolute-path-index.html',
-      contents: new Buffer(this.htmlFileContents('absolute-path-index'))
+      contents: Buffer.from(this.htmlFileContents('absolute-path-index'))
     });
     callback();
     

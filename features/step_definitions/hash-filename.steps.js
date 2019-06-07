@@ -1,6 +1,6 @@
 var chai = require('chai');
 var expect = chai.expect;
-var File = require('gulp-util').File;
+var File = require('vinyl');
 var Buffer = require('buffer').Buffer;
 
 module.exports = function() {
@@ -15,7 +15,7 @@ module.exports = function() {
       cwd: 'test/fixtures/',
       base: 'test/fixtures/static',
       path: 'test/fixtures/static/index.html',
-      contents: new Buffer(this.htmlFileContents('index'))
+      contents: Buffer.from(this.htmlFileContents('index'))
     });
     callback();
   });
